@@ -8,7 +8,7 @@
 
 	\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=3.5cm]
     \tikzstyle{level 2}=[level distance=3.5cm, sibling distance=3.5cm]
-    \tikzstyle{level 3}=[level distance=4cm, sibling distance=3.5cm]
+    \tikzstyle{level 3}=[level distance=4cm, sibling distance=4cm]
     \tikzstyle{level 4}=[level distance=3cm, sibling distance=.75cm]
 
     \tikzstyle{bag} = [text width=4em, text centered]
@@ -26,16 +26,19 @@
                             child {
                                 node[bag] (building_errors) {Building Errors}
                                 child {
+                                	node[end, label=right:\textsc{Imprecise geometry}] {}
+                                }
+                                child {
                                 	node[end, label=right:\textsc{Under segmentation}] (b_under) {}
                                 }
                                 child {
                                 	node[end, label=right:\textsc{Over segmentation}] {}
                                 }
                                 child {
-                                	node[end, label=right:\textsc{Inexact footprint}] {}
+                                	node[end, label=right:\textsc{Imprecise footprint borders}] {}
                                 }
                                 child {
-                                	node[end, label=right:\textsc{Imprecise height}] {}
+                                	node[end, label=right:\textsc{Inaccurate footprint topology}] {}
                                 }
                                 edge from parent
                             }
@@ -48,7 +51,10 @@
                                 	node[end, label=right:\textsc{Over segmentation}] {}
                                 }
                                 child {
-                                	node[end, label=right:\textsc{Inexact segmentation}] {}
+                                	node[end, label=right:\textsc{Imprecise footprint borders}] {}
+                                }
+                                child {
+                                	node[end, label=right:\textsc{Inaccurate footprint topology}] {}
                                 }
                                 child {
                                 	node[end, label=right:\textsc{Imprecise slope}] {}
@@ -68,7 +74,7 @@
         \path (facet_errors |- valid.north) + (-1.5,1) node (families_max) {$\textit{finesse}=2$};
         \path (b_under |- valid.north) + (-1,1) node (atomic_max) {$\textit{finesse}=3$};
         \path (facet_errors |- input) + (-1.5,0) node (lod_max) {};
-        \path (b_under |- input) + (6,0) node (lod_min) {};
+        \path (b_under |- input) + (7.5,0) node (lod_min) {};
         
     	\draw[dashed, orange, ultra thick] (unqualifiable |- b_under.south) + (-1.5,-1) -- (qualifiability_max);
         \draw[dashed, green, ultra thick] (valid |- b_under.south) + (-.75,-1) -- (correctness_max);
