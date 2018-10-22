@@ -184,28 +184,7 @@ Our method relies on predicting errors in order to qualify a 3D model at the sca
 
 \subsection{Classification process}
 
-\begin{table*}
-	\begin{center}
-		\begin{tabular}{c c c x{8cm}}
-			\toprule
-            \textbf{\textit{finesse}} & \textbf{\acrshort{acr::elod}} & \textbf{exclusivity} & \textbf{Classification output}\\
-            \midrule
-            \scriptsize
-            $1$ & -- & -- & Binary(Valid, Erroneous)\\
-            $2$ & \acrshort{acr::lod}-$1$ & -- & Binary(Valid, Building error)\\
-            $2$ & \acrshort{acr::lod}-$2$ & on & MultiClass(Valid, Building error, Facet error)\\
-            $2$ & \acrshort{acr::lod}-$2$ & off & MultiLabel(Valid, Building error, Facet error)\\
-            $3$ & \acrshort{acr::lod}-$1$ & on & MultiLabel(children(Binary(Valid, Building error)))\\
-            $3$ & \acrshort{acr::lod}-$2$ & on & MultiLabel(children(MultiClass(Valid, Building error, Facet error)))\\
-            $3$ & \acrshort{acr::lod}-$1$ & off & MultiLabel(children(Building error))\\
-            $3$ & \acrshort{acr::lod}-$2$ & off & MultiLabel(children(Building error)$\cup$ children(Facet error))\\
-            \bottomrule
-		\end{tabular}
-        \caption{\label{tab::problems} The summary of all possible classification problem types. children($error$) lists the children of $error$ from the taxonomy tree (Figure~\ref{fig::taxonomy}).}
-	\end{center}
-\end{table*}
-
-The labels are organized into different classification problems (Table~\ref{tab::problems}). To account for the desired modularity and flexibility, a random forest classifier is chosen (1,000 trees, maximal depth of 4). The depth is kept shallow in order to avoid overfitting while the large number of estimators deals with the large feature space variability. The \textit{Multi-label} setting is managed using a One vs All strategy on top of our classifier.
+The labels are organized into different classification problems. To account for the desired modularity and flexibility, a random forest classifier is chosen (1,000 trees, maximal depth of 4). The depth is kept shallow in order to avoid overfitting while the large number of estimators deals with the large feature space variability. The \textit{Multi-label} setting is managed using a One vs All strategy on top of our classifier.
 
 \section{Experiments}
 \label{sec:expe}
@@ -245,6 +224,37 @@ Based on the devised pipeline, four feature configurations were tested: ``geomet
 	\end{center}
     \vspace{-.5cm}
     \caption{\label{tab::f3_res}Results (\%) for the \textit{finesse} level $3$. All \textit{atomic} errors are considered over all possible configurations.}
+\end{table*}
+
+\begin{table*}
+	\begin{center}
+		\begin{tabular}{|x{1cm} | x{1.3cm} x{1.3cm} | x{1.2cm} x{1.2cm} | x{1.2cm} x{1.2cm}|}
+                            \hline
+                            & \multicolumn{2}{x{3cm}|}{\textbf{Elancourt (10-cross val.)}} & \multicolumn{2}{x{2.4cm}|}{\textbf{Elancourt $\rightarrow$ Nantes}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Elancourt $\rightarrow$ Paris 13}}\\
+                            \cline{2-7}
+                            &\textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} \\
+                            \hline
+                            \textit{BOS} & 90.83 & 76.14 & \textcolor{IGNDarkGreen}{93.12} & \textcolor{red}{42.61} & \textcolor{IGNDarkGreen}{96.53} & \textcolor{red}{43.82} \\
+                            \hline
+                            \textit{BUS} & 39.32 & 71.81 & \textcolor{red}{8.82} & 66.67 & \textcolor{red}{0} & \textcolor{red}{---} \\
+                            \hline
+                            \textit{BImB} & 16.75 & 68.0 & \textcolor{red}{2.02} & 33.33 & \textcolor{red}{0} & \textcolor{red}{---} \\
+                            \hline
+                            \textit{BInT} & 11.11 & 91.67 & 0.88 & 100 & 3.95 & 50.0 \\
+                            \hline
+                            \hline
+                            \textit{FOS} & 98.91 & 98.84 & \textcolor{IGNDarkGreen}{98.33} & \textcolor{IGNDarkGreen}{97.92} & \textcolor{IGNDarkGreen}{97.19} & \textcolor{IGNDarkGreen}{97.58} \\
+                            \hline
+                            \textit{FUS} & 1.27 & 66.67 & \textcolor{IGNDarkGreen}{13.81} & \textcolor{IGNDarkGreen}{63.04} & 8.36 & 95.83 \\
+                            \hline
+                            \textit{FImB} & 7.42 & 100 & \textcolor{IGNDarkGreen}{46.34} & 65.52 & 11.80 & 60.71 \\
+                            \hline
+                            \textit{FImT} & 3.33 & 100 & 9.09 & 100 & 0 & 0 \\
+                            \hline
+                            \textit{FIG} & 79.02 & 71.82 & \textcolor{IGNDarkGreen}{94.17} & 70.70 & \textcolor{IGNDarkGreen}{86.16} & \textcolor{IGNDarkGreen}{88.47} \\
+                            \hline
+                        \end{tabular}
+	\end{center}
 \end{table*}
 
 Discussion results.
