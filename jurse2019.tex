@@ -1,6 +1,5 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
-% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts,mathrsfs}
 \usepackage{algorithmic}
@@ -79,7 +78,8 @@ florent.lafarge@inria.fr}
 	\begin{figure}
         \begin{center}
             \includestandalone[mode=buildnew, width=\textwidth]{graphical_abstract}
-           \vspace{-1.3cm} \caption{\label{fig::pipeline} The semantic evaluation paradigm proposal. Geometric structural features are first proposed (b), potentially augmented with attributes based on height map and color gradient comparison (c-d). Semantic errors are eventually predicted using a pretrained classifier.}
+            \vspace{-1.3cm}
+            \caption{\label{fig::pipeline} The semantic evaluation paradigm proposal. Geometric structural features are first proposed (b), potentially augmented with attributes based on height map and color gradient comparison (c-d). Semantic errors are eventually predicted using a pretrained classifier.}
         \end{center}
     \end{figure}
 
@@ -173,6 +173,7 @@ Our method relies on predicting errors in order to qualify a 3D model at the sca
                 }
             }
             {
+            	\vspace{-.4cm}
                 \caption{\label{fig::samples}Illustration of various errors of our taxonomy. One can see that geometric, spectral and height information are required for an accurate detection of all kinds of errors.}
             }
         \end{center}
@@ -246,28 +247,28 @@ Based on the devised pipeline, four feature configurations were tested: ``geomet
 \begin{table*}
 	\begin{center}
     	\scriptsize
-		\begin{tabular}{|x{1cm} | x{1.3cm} x{1.3cm} | x{1.2cm} x{1.2cm} | x{1.2cm} x{1.2cm}|}
+		\begin{tabular}{|x{1cm} | x{1.3cm} x{1.3cm} | x{1.2cm} x{1.2cm} | x{1.2cm} x{1.2cm}| x{1.2cm} x{1.2cm}|}
             \hline
-            & \multicolumn{2}{x{2.4cm}|}{\textbf{Elancourt $\rightarrow$ Nantes}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Elancourt $\rightarrow$ Paris 13}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Nantes $\rightarrow$ Elancourt}}\\
-            \cline{2-7}
-            &\textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} \\
+            & \multicolumn{2}{x{2.4cm}|}{\textbf{Elancourt $\rightarrow$ Nantes}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Elancourt $\rightarrow$ Paris-13}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Nantes $\rightarrow$ Elancourt}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Paris-13 $\rightarrow$ Elancourt}}\\
+            \cline{2-9}
+            &\textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} \\
             \hline
-            \textit{BOS} & 93.12 & 42.61 & 96.53 & 43.82 & 86.47 & 64.99 \\
+            \textit{BOS} & 93.12 & 42.61 & 96.53 & 43.82 & 86.47 & 64.99 & 82.14 & 69.59 \\
             \hline
-            \textit{BUS} & 8.82 & 66.67 & 0 & --- & 23.75 & 57.47 \\
+            \textit{BUS} & 8.82 & 66.67 & 0 & --- & 23.75 & 57.47 & 25.0 & 50.49 \\
             \hline
-            \textit{BImB} & 2.02 & 33.33 & 0 & --- & 15.65 & 46.75 \\
+            \textit{BImB} & 2.02 & 33.33 & 0 & --- & 15.65 & 46.75 & 19.89 & 48.05 \\
             \hline
-            \textit{BInT} & 0.88 & 100 & 3.95 & 50.0 & 4.70 & 100 \\
+            \textit{BInT} & 0.88 & 100 & 3.95 & 50.0 & 4.70 & 100 & 4.44 & 100 \\
             \hline
             \hline
-            \textit{FOS} & 98.33 & 97.92 & 97.19 & 97.58 & 98.76 & 98.92 \\
+            \textit{FOS} & 98.33 & 97.92 & 97.19 & 97.58 & 98.76 & 98.92 & 99.06 & 97.14 \\
             \hline
-            \textit{FUS} & 13.81 & 63.04 & 8.36 & 95.83 & 1.68 & 77.78 \\
+            \textit{FUS} & 13.81 & 63.04 & 8.36 & 95.83 & 1.68 & 77.78 & 3.53 & 89.47 \\
             \hline
-            \textit{FImB} & 46.34 & 65.52 & 11.80 & 60.71 & 23.75 & 73.96 \\
+            \textit{FImB} & 46.34 & 65.52 & 11.80 & 60.71 & 23.75 & 73.96 &  &  \\
             \hline
-            \textit{FImT} & 9.09 & 100 & 0 & 0 & 3.57 & 100 \\
+            \textit{FImT} & 9.09 & 100 & 0 & 0 & 3.57 & 100 & 4.3 & 33.33 \\
             \hline
             \textit{FIG} & 94.17 & 70.70 & 86.16 & 88.47 & 86.35 & 67.97 \\
             \hline
