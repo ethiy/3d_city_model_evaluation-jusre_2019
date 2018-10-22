@@ -189,7 +189,20 @@ The labels are organized into different classification problems. To account for 
 \section{Experiments}
 \label{sec:expe}
 
-We evaluate our approach using a 3D city model over the city of \textcolor{red}{Elancourt (France). The studied scene spans an area of \SI{15}{\km\squared}. It exhibits a high diversity of building types and errors: residential districts with mostly bi-level buildings, industrial areas with flat roof buildings, a stadium, a petrol station and administrative edifices such as schools.} These were modeled, using the algorithm described in~\cite{Durupt2006}, out of existing building footprints and an aerial multi-view \acrshort{acr::dsm} with a \SI{0.06}{\m} spatial resolution. \textcolor{red}{1,501} buildings are considered in these experiments. They were annotated according to the atomic errors list provided by our taxonomy.
+We evaluate our approach on a dataset drawn from three French cities: Elancourt, Nantes and the XIII$^e$ arrondissement of Paris (Paris-13). Elancourt exhibits a high diversity of building types: residential districts with mostly bi-level buildings, industrial areas with flat roofs, a stadium, a petrol station and administrative edifices such as schools. Nantes represents a dense urban setting less diversified than the previous one. In Paris-13, high towers in the south coexist with Haussmann style buildings. Buildings in the dataset were modeled, using the algorithm described in~\cite{Durupt2006}, out of existing footprints and an aerial multi-view \acrshort{acr::dsm}. They were annotated according to the atomic errors list provided by our taxonomy. More details are reported in the table~\ref{tab::dataset}.
+
+\begin{table}
+	\begin{center}
+		\scriptsize
+        \begin{tabular}{c c c c}
+                        \toprule
+                        & Elancourt & Nantes & Paris 13 \\
+                        \midrule
+                        \# samples & 2009 & 748 & 478 \\
+                        \bottomrule
+                    \end{tabular}
+	\end{center}
+\end{table}
 
 Based on the devised pipeline, four feature configurations were tested: ``geometric features'' only, ``geometric and height features'', ``geometric and image features'' as well as ``geometric, height and image features''. A \SI{0.06}{\m}/\SI{0.10}{\m} spatial resolution \acrshort{acr::dsm} and integral orthorectified image are used to derive altimetric and optical features. Labels are extracted from a non \textbf{exclusive} and \textbf{\acrshort{acr::elod}} $=$ \acrshort{acr::lod}-$2$ taxonomy. We report here only the \textit{finesse} level of $3$. We perform a $10$-fold cross validation.
 \begin{table*}
@@ -278,7 +291,7 @@ Qualitative assessment is also performed in order to illustrate some failure cas
             \hline
 		\end{tabular}
         \vspace{-.5cm}
-        \caption{\label{fig::results} Predicted (Pred.) errors compared to ground truth (G.T.) labels are illustrated for some pathological cases. Knowing how each error is represented in the dataset helps interpreting mispredictions.}
+        \caption{\label{fig::results} Predicted (Pred.) errors compared to ground truth (G.T.) labels are illustrated in some pathological cases. Knowing how each error is represented in the dataset helps interpreting mispredictions.}
 	\end{center}
 \end{figure*}
 
