@@ -189,21 +189,22 @@ The labels are organized into different classification problems. To account for 
 \section{Experiments}
 \label{sec:expe}
 
-We evaluate our approach on a dataset drawn from three French cities: Elancourt, Nantes and the XIII$^e$ arrondissement of Paris (Paris-13). Elancourt exhibits a high diversity of building types: residential districts with mostly bi-level buildings, industrial areas with flat roofs, a stadium, a petrol station and administrative edifices such as schools. Nantes represents a dense urban setting less diversified than the previous one. In Paris-13, high towers in the south coexist with Haussmann style buildings. Buildings in the dataset were modeled, using the algorithm described in~\cite{Durupt2006}, out of existing footprints and an aerial multi-view \acrshort{acr::dsm}. They were annotated according to the atomic errors list provided by our taxonomy. More details are reported in the table~\ref{tab::dataset}.
+We evaluate our approach on a dataset drawn from three French cities: Elancourt, Nantes and the XIII$^e$ arrondissement of Paris (Paris-13). Elancourt exhibits a high diversity of building types between residential districts with mostly bi-level buildings and  industrial areas with flat roofs. Nantes, in the other hand, represents a dense urban setting less diversified than the previous one. In Paris-13, high towers in the south coexist with Haussmann style buildings. Studied 3D models were obtained, using the algorithm described in~\cite{Durupt2006}, out of existing footprints and an aerial multi-view \acrshort{acr::dsm}. They were annotated according to the atomic errors list provided by our taxonomy. More details are reported in the table~\ref{tab::dataset}.
 
 \begin{table}
 	\begin{center}
 		\scriptsize
         \begin{tabular}{c c c c}
             \toprule
-            & Elancourt & Nantes & Paris 13 \\
+            & Elancourt & Nantes & Paris-13 \\
             \midrule
             \# samples & 2009 & 748 & 478 \\
-            \acrshort{acr::dsm} res. & \SI{0.06}{\m} & \SI{0.1}{\m} & \SI{0.1}{\m} \\
-            Orthoimage res. & \SI{0.06}{\m} & \SI{0.1}{\m} & \SI{0.1}{\m} \\
+            \acrshort{acr::dsm} resolution & \SI{0.06}{\m} & \SI{0.1}{\m} & \SI{0.1}{\m} \\
+            Orthoimage resolution & \SI{0.06}{\m} & \SI{0.1}{\m} & \SI{0.1}{\m} \\
             \bottomrule
         \end{tabular}
-        \caption{\label{tab::dataset} Some stats}
+        \vspace{-.5cm}
+        \caption{\label{tab::dataset} Dataset details.}
 	\end{center}
 \end{table}
 
