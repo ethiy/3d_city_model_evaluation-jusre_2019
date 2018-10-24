@@ -122,16 +122,16 @@ Our method relies on predicting errors in order to qualify a 3D model at the sca
         \begin{itemize}
         	\item \textit{Under segmentation} (\textit{BUS}): two or more buildings are modeled as one;
             \item \textit{Over segmentation} (\textit{BOS}): one building is subdivided into two or more buildings;
-            \item \textit{Imprecise footprint borders} (\textit{BIFoB}): the building footprint borders are imprecise;
-            \item \textit{Inaccurate footprint topology} (\textit{BIFoT}): the building footprint suffers from topological defects as missing inner courts or wrong primitive fitting;
+            \item \textit{Imprecise footprint borders} (\textit{BImB}): the building footprint borders are imprecise;
+            \item \textit{Inaccurate footprint topology} (\textit{BInT}): the building footprint suffers from topological defects as missing inner courts or wrong primitive fitting;
             \item \textit{Imprecise geometry} (\textit{BIG}): inaccurate building geometric estimation. In case \textbf{\acrshort{acr::elod}} $>$ \acrshort{acr::lod}-0 $\cup$ \acrshort{acr::lod}-1, this error is not reported (redundant with errors below);
         \end{itemize}
 - \textbf{Facet errors} family (Figure~\ref{fig::fac_err}):
         \begin{itemize}
         	\item \textit{Under segmentation} (\textit{FUS}): two or more facets are modeled as one;
             \item \textit{Over segmentation} (\textit{FOS}): one facet is subdivided into two or more facets;
-            \item \textit{Imprecise borders} (\textit{FIFoB}): the facet borders are imprecise;
-            \item \textit{Inaccurate topology} (\textit{FIFoT}): the facet suffers from topological defects like a wrong primitive fitting;
+            \item \textit{Imprecise borders} (\textit{FIB}): the facet borders are imprecise;
+            \item \textit{Inaccurate topology} (\textit{FIT}): the facet suffers from topological defects like a wrong primitive fitting;
             \item \textit{Imprecise geometry} (\textit{FIG}): inaccurate facet geometric estimation.
         \end{itemize}
 
@@ -144,8 +144,8 @@ Our method relies on predicting errors in order to qualify a 3D model at the sca
                     \begin{subfloatrow}[4]
                         \ffigbox[\FBwidth]{\caption{\textit{BUS}}\label{fig::under_bul}}{\includegraphics[height=.11\textheight]{images/Building_Errors/under_segmentation}}
                         \ffigbox[\FBwidth]{\caption{\textit{BOS}}\label{fig::over_bul}}{\includegraphics[height=.11\textheight]{images/Building_Errors/over_segmentation}}
-                        \ffigbox[\FBwidth]{\caption{\textit{BInF}}\label{fig::footprint}}{\includegraphics[height=.11\textheight]{images/Building_Errors/footprint}}
-                        \ffigbox[\FBwidth]{\caption{\textit{BImH}}\label{fig::height}}{\includegraphics[height=.11\textheight]{images/Building_Errors/altimetric}}
+                        \ffigbox[\FBwidth]{\caption{\textit{BInT}}\label{fig::footprint}}{\includegraphics[height=.11\textheight]{images/Building_Errors/footprint}}
+                        \ffigbox[\FBwidth]{\caption{\textit{BImB}}\label{fig::height}}{\includegraphics[height=.11\textheight]{images/Building_Errors/altimetric}}
                     \end{subfloatrow}
                 }
                 {
@@ -158,11 +158,12 @@ Our method relies on predicting errors in order to qualify a 3D model at the sca
                 }
                 \ffigbox[\FBwidth]
                 {
-                    \begin{subfloatrow}[4]
+                    \begin{subfloatrow}[5]
                         \ffigbox[\FBwidth]{\caption{\textit{FUS}}\label{fig::under_fac}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/under_segmentation}}
                         \ffigbox[\FBwidth]{\caption{\textit{FOS}}\label{fig::over_fac}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/over_segmentation}}
-                        \ffigbox[\FBwidth]{\caption{\textit{FIS}}\label{fig::mis}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/mis_segmentation}}
-                        \ffigbox[\FBwidth]{\caption{\textit{FImS}}\label{fig::slope}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/slope}}
+                        \ffigbox[\FBwidth]{\caption{\textit{FIB}}\label{fig::mis}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/mis_segmentation}}
+                        \ffigbox[\FBwidth]{\caption{\textit{FIT}}\label{fig::slope}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/slope}}
+                        \ffigbox[\FBwidth]{\caption{\textit{FIG}}\label{fig::slope}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/slope}}
                     \end{subfloatrow}
                 }
                 {
@@ -211,7 +212,8 @@ We evaluate our approach on a dataset drawn from three French cities: Elancourt,
 	\end{center}
 \end{table}
 
-Based on the devised pipeline, four feature configurations were tested: ``geometric features'' only, ``geometric and height features'', ``geometric and image features'' as well as ``geometric, height and image features''. A \SI{0.06}{\m}/\SI{0.10}{\m} spatial resolution \acrshort{acr::dsm} and integral orthorectified image are used to derive altimetric and optical features. Labels are extracted from a non \textbf{exclusive} and \textbf{\acrshort{acr::elod}} $=$ \acrshort{acr::lod}-$2$ taxonomy. We report here only the \textit{finesse} level of $3$. We perform a $10$-fold cross validation.
+Labels are extracted from a non \textbf{exclusive} and \textbf{\acrshort{acr::elod}} $=$ \acrshort{acr::lod}-$2$ taxonomy at \textit{finesse} level of $3$. In table~\ref{tab::ablation}, we report results over Elancourt using all four possible feature configurations performing a 10-fold cross validation. In table~\ref{tab::transferability}, we train over buildings from one urban zone and test on another.
+
 \begin{table*}
 	\scriptsize
 	\begin{center}
@@ -280,7 +282,7 @@ Based on the devised pipeline, four feature configurations were tested: ``geomet
 	\end{center}
 \end{table*}
 
-From table~\ref{tab::ablation}, we can see that well represented errors are well detected. In fact, \textit{BOS} (\textit{resp.} \textit{FOS}, \textit{FIB}), with a $66.80\%$ (\textit{resp.} $64.16\%$, $59.08\%$) presence ratio, attains, in average across all feature configurations, a high recall ratio of $91.93\%$ (\textit{resp.} $98.93\%$, $79,68\%$).
+From table~\ref{tab::ablation}, we can see that well represented errors are well detected. In fact, \textit{BOS} (\textit{resp.} \textit{FOS}, \textit{FIB}), with a $66.80\%$ (\textit{resp.} $64.16\%$, $59.08\%$) presence ratio, attains, in average across all feature configurations, a high recall ratio of $91.93\%$ (\textit{resp.} $98.93\%$, $79,68\%$). In contrast, other \textit{atomic} errors which are not frequently found in the dataset (around $10\%$ of the total) are naturally harder to detect. The ablation study reveals that, for most errors, geometric features yield sensibly the same results except for \textit{BUS} (where height and/or image based features add around $10\%$ in recall while loosing at most $5\%$ in precision) and for \textit{BImB} (as image based features add around $4\%$ in recall without a loss in precision). Paris-13 and Nantes being more densely urbanized than Elancourt explains perfectly why classifiers trained over the first cities are better, regarding Building \textit{atomic} errors, in recall and precision than the ones trained over Elancourt and tested on them. It achieves even close or better recall ratio over \textit{BimB} if compared to classifiers trained on Elancourt itself. However, Facet \textit{atomic} errors are much more easily detected if the classifiers are trained over Elancourt and tested on the other cities. It is also mostly stable compared to evaluation on Elancourt itself and even yields much better results for \textit{FIB} and \textit{FIG}. This can be explained by the fact that Haussmann style buildings and towers offer less diverse facet geometries compared to Bi-level, industrial buildings and other ones that are present in the Elancourt scene.
 
 Qualitative assessment is also performed in order to illustrate some failure cases (Figure~\ref{fig::results}, from left to right). In the first image, the similarity of the building outline to over segmented buildings cases induces an overdetection. In the second example, the building is wrongfully detected as being under segmented due to the presence of a balcony and a smaller annex building. In the third building, while correctly predicting \textit{BOS}, our algorithm fails to detect the under segmented roof. Finally, in the last depiction, except the well caught footprint error, defects are overlooked as there are few comparable samples in the dataset. To alleviate these issues, more robust features could be introduced taking into account higher order information. Dataset enrichment could be another option which provides more instances of underrepresented errors. In the end, we can also add the human in the loop through manual interactive evaluation which can adapt well to user-specific needs.
 
