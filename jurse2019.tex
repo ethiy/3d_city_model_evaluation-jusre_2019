@@ -234,7 +234,7 @@ Based on the devised pipeline, four feature configurations were tested: ``geomet
             \hline
             \textit{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
             \hline
-            \textit{FIB} & \textbf{9.17} & 87.5 & 0 & -- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
+            \textit{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
             \hline
             \textit{FIT} & \textbf{6.67} & \textbf{100} & 8.73 & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
             \hline
@@ -249,9 +249,9 @@ Based on the devised pipeline, four feature configurations were tested: ``geomet
 \begin{table*}
 	\begin{center}
     	\scriptsize
-		\begin{tabular}{|x{1cm} | x{1.3cm} x{1.3cm} | x{1.2cm} x{1.2cm} | x{1.2cm} x{1.2cm}| x{1.2cm} x{1.2cm}|}
+		\begin{tabular}{|x{1cm} | x{1.2cm} x{1.2cm} | x{1.2cm} x{1.2cm} || x{1.2cm} x{1.2cm}| x{1.2cm} x{1.2cm}|}
             \hline
-            & \multicolumn{2}{x{2.4cm}|}{\textbf{Elancourt $\rightarrow$ Nantes}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Elancourt $\rightarrow$ Paris-13}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Nantes $\rightarrow$ Elancourt}} & \multicolumn{2}{x{2.5cm}|}{\textbf{Paris-13 $\rightarrow$ Elancourt}}\\
+            & \multicolumn{2}{x{2.4cm}|}{\textbf{Elancourt $\rightarrow$ Nantes}} & \multicolumn{2}{x{2.4cm}||}{\textbf{Elancourt $\rightarrow$ Paris-13}} & \multicolumn{2}{x{2.4cm}|}{\textbf{Nantes $\rightarrow$ Elancourt}} & \multicolumn{2}{x{2.4cm}|}{\textbf{Paris-13 $\rightarrow$ Elancourt}}\\
             \cline{2-9}
             &\textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} & \textbf{Recall} & \textbf{Prec.} \\
             \hline
@@ -261,18 +261,18 @@ Based on the devised pipeline, four feature configurations were tested: ``geomet
             \hline
             \textit{BImB} & \textcolor{red}{0} & \textcolor{red}{---} & \textcolor{red}{1.85} & \textcolor{red}{33.33} & 15.65 & 46.75 & 19.89 & 48.05 \\
             \hline
-            \textit{BInT} & \textcolor{darkgreen}{40.71} & 14.24 & 0 & --- & 4.70 & 100 & 4.44 & 100 \\
+            \textit{BInT} & \textcolor{darkgreen}{40.71} & \textcolor{red}{14.24} & \textcolor{red}{0} & \textcolor{red}{---}  & 4.70 & 100 & 4.44 & 100 \\
             \hline
             \hline
-            \textit{FOS} & \textcolor{darkgreen}{100} & 69.38 & 98.80 & 96.47 & 98.76 & 98.92 & 99.06 & 97.14 \\
+            \textit{FOS} & \textcolor{darkgreen}{100} & \textcolor{red}{69.38} & \textcolor{darkgreen}{98.80} & \textcolor{orange}{96.47} & 98.76 & 98.92 & 99.06 & 97.14 \\
             \hline
-            \textit{FUS} & 15.71 & 56.90 & 20.73 & 91.94 & 1.68 & 77.78 & 3.53 & 89.47 \\
+            \textit{FUS} & \textcolor{darkgreen}{15.71} & \textcolor{orange}{56.90} & \textcolor{darkgreen}{20.73} & \textcolor{darkgreen}{91.94} & 1.68 & 77.78 & 3.53 & 89.47 \\
             \hline
-            \textit{FIB} & \textcolor{darkgreen}{83.54} & 43.08 & \textcolor{darkgreen}{39.58} & 64.04 & 23.75 & 73.96 & 21.86 & 70.11 \\
+            \textit{FIB} & \textcolor{darkgreen}{83.54} & \textcolor{red}{43.08} & \textcolor{darkgreen}{39.58} & \textcolor{red}{64.04} & 23.75 & 73.96 & 21.86 & 70.11 \\
             \hline
             \textit{FIT} & 9.09 & 33.33 & 0 & 0 & 3.57 & 100 & 4.34 & 33.33 \\
             \hline
-            \textit{FIG} & \textcolor{darkgreen}{100} & 64.45 & \textcolor{darkgreen}{90.86} & \textcolor{darkgreen}{86.14} & 86.35 & 67.97 & 82.38 & 73.08 \\
+            \textit{FIG} & \textcolor{darkgreen}{100} & \textcolor{orange}{64.45} & \textcolor{darkgreen}{90.86} & \textcolor{darkgreen}{86.14} & 86.35 & 67.97 & 82.38 & 73.08 \\
             \hline
         \end{tabular}
         \vspace{-.5cm}
