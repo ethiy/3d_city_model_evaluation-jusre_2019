@@ -280,8 +280,7 @@ Based on the devised pipeline, four feature configurations were tested: ``geomet
 	\end{center}
 \end{table*}
 
-Discussion results.
-
+From table~\ref{tab::ablation}, we can see how well represented errors are well detected. In fact, \textit{BOS}, \textit{FOS} and \textit{}
 Qualitative assessment is also performed in order to illustrate some failure cases (Figure~\ref{fig::results}, from left to right). In the first image, the similarity of the building outline to over segmented buildings cases induces an overdetection. In the second example, the building is wrongfully detected as being under segmented due to the presence of a balcony and a smaller annex building. In the third building, while correctly predicting \textit{BOS}, our algorithm fails to detect the under segmented roof. Finally, in the last depiction, except the well caught footprint error, defects are overlooked as there are few comparable samples in the dataset. To alleviate these issues, more robust features could be introduced taking into account higher order information. Dataset enrichment could be another option which provides more instances of underrepresented errors. In the end, we can also add the human in the loop through manual interactive evaluation which can adapt well to user-specific needs.
 
 \begin{figure*}
