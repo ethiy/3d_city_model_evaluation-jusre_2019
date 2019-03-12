@@ -25,7 +25,6 @@
 
 \DeclareCaptionFont{tiny}{\tiny}
 \DeclareCaptionFont{scriptsize}{\scriptsize}
-\captionsetup[subtable]{labelfont={tiny, bf},textfont=normalfont,singlelinecheck=on}
 \captionsetup[subfigure]{labelfont={tiny, bf},textfont=tiny,singlelinecheck=on}
 
 \usepackage{standalone}
@@ -72,9 +71,7 @@ florent.lafarge@inria.fr}
 
 \section{Introduction}
 
-	Although automatic 3D urban modeling has been extensively studied for many years by academics and industrials alike, current algorithms fail to adapt to different urban settings~\cite{Musialski2012}. Output building models still have to be inspected by human operators for quality assessment and subsequent correction. Thus, scalability is not handled in the literature albeit being critical in operational contexts. In this work, we study the automation of 3D building models evaluation. 
-    
-    We focus on assessing polyhedral structured models. They represent building roof architectures, which result from a given urban reconstruction method, unknown here. Each facet of the model corresponds to an architectural (post of the time planar) feature. Such 3D models do not correspond to triangle meshes. The latter ones exhibit higher data fidelity but lower compacity and no semantics. Depending on the spatial resolution of input data, the urban scene, and the intended use, the reconstituted model has a certain \textbf{\gls{acr::lod}}~\cite{kolbe2005citygml}.
+	Although automatic 3D urban modeling has been extensively studied for many years by academics and industrials alike, current algorithms fail to adapt to different urban settings~\cite{Musialski2012}. Output building models still have to be inspected by human operators for quality assessment and subsequent correction. Thus, scalability is not handled in the literature albeit being critical in operational contexts. In this work, we study the automation of 3D building model evaluation. We focus on assessing polyhedral structured models. They represent building roof architectures, which result from a given urban reconstruction method, unknown here. Each facet of the model corresponds to an architectural (post of the time planar) feature. Such 3D models do not correspond to triangle meshes. The latter ones exhibit higher data fidelity but lower compacity and no semantics. Depending on the spatial resolution of input data, the urban scene, and the intended use, the reconstituted model has a certain \textbf{\gls{acr::lod}}~\cite{kolbe2005citygml}.
     
     Few works have addressed the quality assessment of 3D urban models at building level. Usually, visual inspection~\cite{Durupt2006} or comparison with field measurements~\cite{Kaartinen2005} are performed, void of structural information. Our work focuses on semantically evaluating the structural compliance of modeled buildings. We define an evaluation framework that can be used for building model correction, change detection, reconstruction method selection, and crowdsourcing evaluation. We ignore format/geometric issues~\cite{ledoux2018val3dity}. Our framework targets to be independent from the \acrlong{acr::lod} and the modeling method. Quality metrics can be provided with the reconstruction process but lack of independence with the underlying method. 
 
@@ -97,15 +94,15 @@ Section~\ref{sec:related} introduces the problem of the evaluation of 3D buildin
 
 \section{Related Work}
 \label{sec:related}
-	3D urban models qualification has been barely investigated in the literature despite plethora of modeling approaches. Methods can be classified based on the assessment criteria: geometric fidelity indices or semantic errors. Geometric fidelity metrics quantify the modeling accuracy relying on the precision of points of interest (e.g., intersection points), of surfaces or on the 3D model volume. These are usually compared to higher resolution reference data~\cite{Kaartinen2005,Zeng2014}. These metrics fail to describe local modeling defects. Consequently, semantic errors are preferred for such a task, often following the traffic light paradigm. For instance, four levels of quality are defined in~\cite{boudet2006supervised}: Correct, Acceptable, Generalized, and False. However, these levels are not explicitly quantified and are ill defined: they depends on the end-user. The error taxonomy can also adopt the modeling method perspective. Errors can be grouped into footprint ones (e.g., erroneous outline, missing inner court) and modeling errors (under/over-segmentation, height inaccuracy). These are therefore methode-dependent. The building model is therefore assessed owing to a supervised classification that takes these defined errors as labels. In order to represent input models, features are extracted from aerial images or \acrfull{acr::dsm} at very high resolution (\SIrange{20}{25}{\cm}), by 3D segments comparisons or texture correlation ratios~\cite{Michelin2013,boudet2006supervised}. Despite satisfactory results, this approach exhibits two main drawbacks: a taxonomy specific to some urban scenes or modeling methods and a complex feature computation step, preventing upscaling strategies. The main idea of our work is to propose an agnostic assessment approach that do not rely on reference data and complex features.
+	3D urban models qualification has been barely investigated in the literature despite plethora of modeling approaches. Methods can be classified based on the assessment criteria: geometric fidelity indices or semantic errors. Geometric fidelity metrics quantify the modeling accuracy relying on the precision of points of interest (e.g., intersection points), of surfaces or on the 3D model volume. These are usually compared to higher resolution reference data~\cite{Kaartinen2005,Zeng2014}. These metrics fail to describe local modeling defects. Consequently, semantic errors are preferred for such a task, often following the traffic light paradigm. For instance, four levels of quality are defined in~\cite{boudet2006supervised}: Correct, Acceptable, Generalized, and False. However, these levels are not explicitly quantified and are ill defined: they depends on the end-user. The error taxonomy can also adopt the modeling method perspective. Errors can be grouped into footprint ones (e.g., erroneous outline, missing inner court) and modeling errors (under/over-segmentation, height inaccuracy). These are therefore method-dependent. The building model is therefore assessed owing to a supervised classification that takes these defined errors as labels. In order to represent input models, features are extracted from aerial images or \acrfull{acr::dsm} at very high resolution (\SIrange{20}{25}{\cm}), by 3D segments comparisons or texture correlation ratios~\cite{Michelin2013,boudet2006supervised}. Despite satisfactory results, this approach exhibits two main drawbacks: a taxonomy specific to some urban scenes or modeling methods and a complex feature computation step, preventing upscaling strategies. The main idea of our work is to propose an agnostic assessment approach that do not rely on reference data and complex features.
 
 \section{Methodology}
 \label{sec:approach}
 
-Our method relies on predicting errors in order to qualify a 3D model at the scale of a building. Errors are defined in a hierarchical taxonomy, based on the assessment objectives. Handcrafted features of various kinds are computed (Figure~\ref{fig::pipeline}). A supervised classifier is trained using annotated building models and tested later on unseen buildings for quality prediction based on the detected errors. This pipeline is modular: it takes into account geometric features that are extracted from the 3D model, which can be augmented by height features or optical features extracted from a VHR orthoimage.
+Our method relies on predicting errors in order to qualify a 3D model at the scale of a building. Errors are defined in a hierarchical taxonomy, based on the assessment objectives. Handcrafted features of various kinds are computed (Figure~\ref{fig::pipeline}). A supervised classifier is trained using annotated building models and tested later on unseen buildings for quality prediction based on the detected errors. This pipeline is modular: it takes into account geometric features, coming from the 3D model, which can be augmented by height features, from the \acrshort{acr::dsm}, or optical features, from a VHR orthoimage.
 
 \subsection{Error taxonomy}
-	Two criteria are taken into account so as to build a generic and flexible taxonomy: the \acrshort{acr::lod} and the semantic level, which we call henceforth \textit{finesse}. An \textit{atomic} error is one with maximal \textit{finesse}: it corresponds, intuitively, to a unitary action that an operator should take in order to correct a model.
+	Two criteria are taken into account so as to build a generic and flexible taxonomy (Figure~\ref{fig::taxonomy}): the \acrshort{acr::lod} and the semantic level, which we call henceforth \textit{finesse}. An \textit{atomic} error is one with maximal \textit{finesse}: it corresponds, intuitively, to a unitary action that an operator should take in order to correct a model.
     
     From an operational perspective, not all buildings are qualifiable. For instance, buildings can be occluded by vegetation or happen to show self-intersection problems. These pathological cases are outside the realm of our assessment framework. Thus, in the \textit{finesse} level equal to $0$, we discriminate between \textit{Qualifiable} and \textit{Unqualifiable} models. At the next level, models are classified being \textit{Valid} or \textit{Erroneous}. Based on the \acrshort{acr::lod}, these last models are distinguished into error families at \textit{finesse} equal to $2$. \textit{Building errors} correspond to defects at the building level (\acrshort{acr::lod}-1 $\cup$ \acrshort{acr::lod}-0). Errors related to building facets (\acrshort{acr::lod}-2) are assembled into \textit{Facet errors}. The last family, \textit{Superstructure errors}, groups errors pertaining to \acrshort{acr::lod}-3 errors. These families contain \textit{atomic} errors that have a maximal \textit{finesse} equal to $3$.
     
@@ -116,7 +113,7 @@ Our method relies on predicting errors in order to qualify a 3D model at the sca
         \begin{center}
             \includestandalone[mode=buildnew, width=\textwidth]{taxonomy_tree}
             \vspace{-1.1cm}
-            \caption{\label{fig::taxonomy} The proposed taxonomy structure. In our case of VHR overhead modeling, only two families of errors are depicted. At \textit{finesse} level $2$, a hierarchy exists and \textbf{exclusivity} may prevail.}
+            \caption{\label{fig::taxonomy} The proposed taxonomy structure. In the VHR overhead case, only two families of errors are depicted. At \textit{finesse} level $2$, a hierarchy exists and \textbf{exclusivity} may prevail.}
         \end{center}
     \end{figure}
 - \textbf{Building errors} family (Figure~\ref{fig::bul_err}):
@@ -163,7 +160,7 @@ Our method relies on predicting errors in order to qualify a 3D model at the sca
                         \ffigbox[\FBwidth]{\caption{\textit{FUS}}\label{fig::under_fac}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/under_segmentation}}
                         \ffigbox[\FBwidth]{\caption{\textit{FOS}}\label{fig::over_fac}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/over_segmentation}}
                         \ffigbox[\FBwidth]{\caption{\textit{FIB}}\label{fig::mis}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/mis_segmentation}}
-                        \ffigbox[\FBwidth]{\caption{\textit{FIT}}\label{fig::slope}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/topology}}
+                        \ffigbox[\FBwidth]{\caption{\textit{FIT}}\label{fig::topology}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/topology}}
                         \ffigbox[\FBwidth]{\caption{\textit{FIG}}\label{fig::slope}}{\includegraphics[height=.11\textheight]{images/Facet_Errors/slope}}
                     \end{subfloatrow}
                 }
@@ -211,9 +208,9 @@ The labels are organized into different classification problems. To account for 
 	\end{center}
 \end{wraptable}
 
-We evaluate our approach on a dataset drawn from three French cities: Elancourt, Nantes and the XIII$^e$ arrondissement of Paris (Paris-13). Elancourt exhibits a high diversity of building types between residential districts with mostly bi-level buildings and  industrial areas with flat roofs. Nantes, in the other hand, represents a dense urban setting less diversified than the previous one. In Paris-13, high towers in the south coexist with Haussmann style buildings. Studied 3D models were obtained, using the algorithm described in~\cite{Durupt2006}, out of existing footprints and an aerial multi-view \acrshort{acr::dsm}. They were annotated according to the atomic errors list provided by our taxonomy. More details are reported in the table~\ref{tab::dataset}.
+We evaluate our approach on a dataset drawn from three French cities: Elancourt, Nantes and one district of Paris (Paris-13). Elancourt exhibits a high diversity of building types: residential areas (bi-level buildings) and industrial sections (flat roofs). Nantes represents a denser urban setting with lower diversity. In Paris-13, high towers coexist with Haussmann style buildings. Input 3D models were obtained using the algorithm described in~\cite{Durupt2006}, out of existing footprints and an aerial VHR multi-view \acrshort{acr::dsm}. They were annotated according to the atomic errors list provided by our taxonomy. More details are reported in Table~\ref{tab::dataset}.
 
-Labels are extracted from the taxonomy at \textit{finesse} level of $3$. In table~\ref{tab::ablation}, we report results over Elancourt using all four possible feature configurations performing a 10-fold cross validation. In table~\ref{tab::transferability}, we experimented training over buildings from one urban zone and testing on another.
+Labels are extracted from the taxonomy at \textit{finesse} level of $3$. In Table~\ref{tab::ablation}, we report results over Elancourt using all four possible feature configurations performing a 10-fold cross validation. In Table~\ref{tab::transferability}, we experimented training over buildings from one urban zone and testing on another.
 
 \begin{table*}
 	\scriptsize
@@ -246,7 +243,7 @@ Labels are extracted from the taxonomy at \textit{finesse} level of $3$. In tabl
 		\end{tabular}
 	\end{center}
     \vspace{-.5cm}
-    \caption{\label{tab::ablation}Ablation study (in \%) at \textit{finesse} $= 3$. All \textit{atomic} errors are considered over all possible configurations.}
+    \caption{\label{tab::ablation}Ablation study (in \%) at \textit{finesse} $= 3$ on Elancourt.}
 \end{table*}
 
 \begin{table*}
@@ -279,14 +276,9 @@ Labels are extracted from the taxonomy at \textit{finesse} level of $3$. In tabl
             \hline
         \end{tabular}
         \vspace{-.5cm}
-        \caption{\label{tab::transferability} Transferability study (in \%) at \textit{finesse} $= 3$ over different urban scenes. Compared to previous results in~\ref{tab::ablation}, \textcolor{darkgreen}{$\blacksquare$} indicates a stable or better result, \textcolor{orange}{$\blacksquare$} correspond to a small drop and \textcolor{red}{$\blacksquare$} expresses a sizable misperformance.}
+        \caption{\label{tab::transferability} Transferability study (in \%) at \textit{finesse} $= 3$ over different urban scenes using all features. Compared to previous results in Table~\ref{tab::ablation}, \textcolor{darkgreen}{$\blacksquare$}: a stable or better result, \textcolor{orange}{$\blacksquare$}: a small drop and \textcolor{red}{$\blacksquare$}: a significant decrease in accuracy.}
 	\end{center}
 \end{table*}
-
-From table~\ref{tab::ablation}, we can see that well represented errors are well detected. In fact, \textit{BOS} (\textit{resp.} \textit{FOS}, \textit{FIB}), with a $66.80\%$ (\textit{resp.} $64.16\%$, $59.08\%$) presence ratio, attains, in average across all feature configurations, a high recall ratio of $91.93\%$ (\textit{resp.} $98.93\%$, $79,68\%$). In contrast, other \textit{atomic} errors which are not frequently found in the dataset (around $10\%$ of the total) are naturally harder to detect. The ablation study reveals that, for most errors, geometric features yield sensibly the same results except for \textit{BUS} (where height and/or image based features add around $10\%$ in recall while loosing at most $5\%$ in precision) and for \textit{BImB} (as image based features add around $4\%$ in recall without a loss in precision). Paris-13 and Nantes being more densely urbanized than Elancourt explains perfectly why classifiers trained over the first cities are better, regarding Building \textit{atomic} errors, in recall and precision than the ones trained over Elancourt and tested on them. It achieves even close or better recall ratio over \textit{BimB} if compared to classifiers trained on Elancourt itself. However, Facet \textit{atomic} errors are much more easily detected if the classifiers are trained over Elancourt and tested on the other cities. It is also mostly stable compared to evaluation on Elancourt itself and even yields much better results for \textit{FIB} and \textit{FIG}. This can be explained by the fact that Haussmann style buildings and towers offer less diverse facet geometries compared to Bi-level, industrial buildings and other ones that are present in the Elancourt scene.
-
-Qualitative assessment is also performed in order to illustrate some failure cases (Figure~\ref{fig::results}, from left to right). In the first example, the similarity of the building outline to over segmented buildings cases induces an overdetection. In general, these samples help us devise more robust features so as to alleviate these issues. Dataset enrichment could be another option which provides more instances of underrepresented errors. In the end, we can also add the human in the loop through manual interactive evaluation which can adapt well to user-specific needs.
-
 \begin{figure*}
 	\begin{center}
     \tiny
@@ -303,14 +295,20 @@ Qualitative assessment is also performed in order to illustrate some failure cas
             \hline
 		\end{tabular}
         \vspace{-.5cm}
-        \caption{\label{fig::results} Predicted (Pred.) errors compared to ground truth (G.T.) labels are illustrated in some pathological cases. Knowing how each error is represented in the dataset helps interpreting mispredictions.}
+        \caption{\label{fig::results} Predicted (Pred.) errors compared to ground truth (G.T.) labels are illustrated in some pathological cases. Knowing how each error is represented in the dataset helps interpreting misclassifications.}
 	\end{center}
 \end{figure*}
+
+From Table~\ref{tab::ablation}, we can see that well represented errors are correctly detected. In fact, \textit{BOS} (\textit{resp.} \textit{FOS}, \textit{FIB}), with a $66.8\%$ (\textit{resp.} $64.16\%$, $59.08\%$) occurrence ratio, attains, in average across all configurations, a high recall ratio of $91.93\%$ (\textit{resp.} $98.93\%$, $79,68\%$). In contrast, other \textit{atomic} errors which are not frequently found in the dataset (a$\sim$$10\%$ of the total) are naturally harder to detect. The ablation study reveals that, for most errors, geometric features yield sensibly the same results, except for \textit{BUS} (where height and/or image based features add around $10\%$ in recall while loosing at most $5\%$ in precision), and for \textit{BImB} (as image based features add around $4\%$ in recall without a loss in precision). In Paris-13 and Nantes buildings are often more adjacent than Elancourt, this perfectly explains why classifiers trained over Paris/Nantes are better, regarding Building \textit{atomic} errors, in recall and precision than the ones trained over Elancourt and tested on them. It achieves even close or better recall ratio over \textit{BimB} if compared to classifiers trained on Elancourt itself. However, Facet \textit{atomic} errors are much more easily detected if the classifiers are trained over Elancourt and tested on the other cities. It is also mostly stable compared to evaluation on Elancourt itself and even yields much better results for \textit{FIB} and \textit{FIG}. This can be explained by the fact that Haussmann style buildings and high flat towers offer less diverse facet geometries compared to bi-level hipped roofs, industrial buildings and other residential features that are present in the Elancourt scene.
+
+Qualitative assessment is also performed in order to illustrate some failure cases. In the leftmost example of Figure~\ref{fig::results}, the similarity of the building outline to over segmented buildings cases induces an overdetection. Sometimes, the VHR of the data does not suffice to detect all errors that are visually identifiable. In general, these samples help us devise more robust features so as to alleviate these issues. Dataset enrichment could be another option which provides more instances of underrepresented errors. In the end, we can also add the human in the loop through a manual interactive evaluation/classification mechanism which could adapt well to user-specific needs.
+
+
 
 \section{Conclusion}
 \label{sec::conclusion}
 
-We proposed a framework to semantically evaluate 3D building models. Errors were hierarchically organized into a flexible and parametrized taxonomy, handling the large diversity of urban environments and end users' requirements. Model quality was predicted using a supervised classifier using three modalities. Although being mitigated over under-represented errors, results are satisfactory in the well balanced cases. As a next step, more structurally aware features (e.g., based on graph comparison) will be proposed, so as to be applied on a richer and more diverse dataset (potentially involving data augmentation) under a deep-based framework.
+We proposed a framework to semantically evaluate 3D building models. Errors were hierarchically organized into a flexible and parametrizable taxonomy, handling the large diversity of urban environments and end users' requirements. Model quality was predicted using a supervised classifier using three modalities. Although being mitigated over under-represented errors, results are satisfactory in the well balanced cases. As a next step, more structurally aware features (e.g., based on graph comparison) will be proposed, so as to be applied on a richer and more diverse dataset (potentially involving data augmentation) under a deep-based framework.
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,references}
