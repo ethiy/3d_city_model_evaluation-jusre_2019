@@ -1,4 +1,5 @@
 \documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
 
 \usepackage{cite}
 
@@ -48,8 +49,7 @@
 
 \begin{document}
 
-\title{The necessary yet complex evaluation of 3D city models: a semantic approach
-}
+\title{The necessary yet complex evaluation of 3D city models: a semantic approach}
 
 \author{\IEEEauthorblockN{Oussama Ennafii, Cl\'ement Mallet, Arnaud Le Bris}
 \IEEEauthorblockA{Univ. Paris Est, IGN-ENSG, LaSTIG, Saint-Mand\'e, France \\
@@ -61,6 +61,13 @@ florent.lafarge@inria.fr}
 }
 
 \maketitle
+
+\IEEEpubid{
+    \begin{minipage}{\textwidth}\ \\[12pt] \centering
+        ~ \\~ \\~\\ 
+        978-1-7281-0009-8/19/\$31.00 \copyright 2019 IEEE
+    \end{minipage}
+}
 
 \begin{abstract}
 	The automatic modeling of urban scenes in 3D from geospatial data has been studied for more than thirty years. However, the output models still have to undergo a tedious task of correction at city scale. In this work, we propose an approach for automatically evaluating the quality of 3D building models. A taxonomy of potential errors is first proposed. Handcrafted features are computed, based on the geometric properties of buildings and, when available, Very High Resolution images and depth data. They are fed into a Random Forest classifier for the prediction of the quality of the models. We tested our framework on three distinct urban areas in France. We can satisfactorily detect, on average 96\% of the most frequent errors.
@@ -313,3 +320,4 @@ We proposed a framework to semantically evaluate 3D building models. Errors were
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,references}
 \end{document}
+
