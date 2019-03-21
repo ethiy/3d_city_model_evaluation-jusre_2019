@@ -1,4 +1,4 @@
-\documentclass[tikz, border=7pt]{standalone}
+\documentclass[tikz]{standalone}
 
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
@@ -48,7 +48,7 @@
         \draw[decorate, decoration={brace, amplitude=3pt}] (facet_graph.north west) -- (ortho_projection.east |- facet_graph.north) node[midway, yshift=5pt]{\tiny Features};
 
 		\path (ortho_projection.east) + (1,0) node (errors) {\includestandalone[mode=buildnew, height=1cm]{building_errors}};
-        \path (errors |- residual_legend) node (errors_legend) {\tiny (d) Erroneous building:};
+        \path (errors |- residual_legend) node (errors_legend) {\tiny (e) Erroneous building:};
         \path (errors_legend.south) + (0,-.1) node[align=left] (errors_list) {\tiny {\color{red}$\blacksquare$ Fidelity error}.};
          \path (errors_list.south) node[align=left] (errors_list) {\tiny {\color{blue}$\blacksquare$ Modeling error}.};
          
