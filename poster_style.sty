@@ -1,0 +1,109 @@
+\usepackage[utf8]{inputenc}
+
+\usepackage{textcomp}
+
+\usepackage{natbib}
+\setlength{\bibsep}{0.0mm}
+
+\usepackage[font={small, color=IGNDarkGrey}, figurename=Fig., tablename=Tab., labelfont={bf, color=IGNGreen}]{caption}
+
+\usepackage{enumitem}
+
+\usepackage{graphicx}
+\usepackage{rotating}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{tabulary}
+\usepackage{booktabs}
+
+\usepackage{multirow}
+\usepackage{multicol}
+
+\usepackage{standalone}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{relsize}
+
+\usepackage{url}
+
+\usepackage{siunitx}
+
+
+\renewcommand{\baselinestretch}{.75}
+
+\graphicspath{{./images/}}
+
+%% Multicolumn configuration
+\setlength{\columnsep}{.5em}
+\setlength{\columnseprule}{0mm}
+
+%% Colors
+\definecolor{IGNGreen}{RGB}{163, 210, 11}
+\definecolor{IGNGrey}{RGB}{159, 164, 168}
+\definecolor{IGNDarkGrey}{RGB}{101, 105, 110}
+
+\usepackage{colortbl}
+\definecolor{Moins4}{RGB}{183,10,10}
+\definecolor{Moins3}{RGB}{255,0,0}
+\definecolor{Moins2}{RGB}{255,122,12}
+\definecolor{Moins1}{RGB}{255,181,12}
+\definecolor{Zero}{RGB}{255,255,255}
+\definecolor{Plus1}{RGB}{58,255,12}
+\definecolor{Plus2}{RGB}{58,155,12}
+
+
+\newcommand\InvisibleBox[4]
+{
+    \begin{posterbox}[
+        name=#1,#2,
+        boxheaderheight=0em,
+        borderColor=white
+    ]{#3}{#4}
+    \end{posterbox}
+}
+
+\newcommand\TransitionBox[3]{
+    \begin{posterbox}[
+        name=#1,
+        column=0,
+        span=6,
+        #2,
+        headerfont=\normalsize,
+        headershape=roundedright,
+        headerColorOne=IGNGrey,
+        headerColorTwo=IGNGrey,
+        headerborder=none,
+        headerFontColor=white,
+        textborder=none
+        ]{#3}{}
+    \end{posterbox}
+}
+
+\newcommand\ReferencesBox[4]{
+    \begin{posterbox}[
+        name=#1,#2,
+        headerfont=\scshape,
+        headerColorOne=IGNGrey,
+        headerColorTwo=IGNGrey,
+        headerborder=none,
+        textborder=none,
+        headerFontColor=white
+        ]{#3}{#4}
+    \end{posterbox}
+}
+
+\newcommand\StandardBox[4]{
+    \begin{posterbox}[
+        name=#1,#2,
+        headerfont=\bf,
+        boxColorOne=white,
+        headerFontColor=IGNGreen,
+        headerColorOne=white,
+        headerborder=closed,
+        headerColorTwo=white,
+        textborder=roundedsmall]
+    {#3}{#4}\end{posterbox}
+}
