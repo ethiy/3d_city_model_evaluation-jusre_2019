@@ -1,0 +1,44 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{xcolor}
+\definecolor{wheat}{RGB}{245,222,179}
+\definecolor{IGNDarkGreen}{RGB}{0, 155, 85}
+
+\usepackage{standalone}
+
+\usepackage{pgfplots}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, shadows, calc, decorations}
+
+\usepackage{mathrsfs, amsmath}
+
+
+\begin{document}
+    \begin{tikzpicture}
+    	\node (facet_graph) {\includestandalone[mode=buildnew, height=4cm]{building_graph}};
+        \path (facet_graph) + (-.2, -1) node[IGNDarkGreen] (f) {\small $f$};
+        \path (facet_graph) + (2, -.85) node[IGNDarkGreen] (g) {\small $g$};
+        
+        \path (f) + (-2, -1) node[IGNDarkGreen] (facet_attributes) {\tiny
+        $\begin{bmatrix}
+        	\texttt{degree}(f)\\
+            \texttt{Area}(f)\\
+            \texttt{Circumference}(f)
+         \end{bmatrix}$
+        };
+        \path (f) + (1.5, -1.5) node[blue] (edge_attributes) {\tiny
+        $\begin{bmatrix}
+            \vert\vert \texttt{Centroid}(f)- \texttt{Centroid}(g) \vert\vert_2\\
+            \texttt{angle}(\vec{n}(f), \vec{n}(g))
+         \end{bmatrix}$
+        };
+        
+        \path[draw, IGNDarkGreen, ->, line width=1pt, rounded corners=10pt] (f.185) -- (facet_attributes.north);
+        \path (edge_attributes.north |- f.east) + (-.25, .4) node (edge) {};
+        \path[draw, blue, ->, line width=1pt, rounded corners=10pt] (edge) -- (edge |- edge_attributes.north);
+    \end{tikzpicture}
+\end{document}

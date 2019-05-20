@@ -1,0 +1,20 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{standalone}
+
+\usepackage{siunitx}
+
+\begin{document}
+    \begin{tikzpicture}
+        \node (nantes) at (0,0) {\includegraphics[height=12cm]{images/nantes}};
+        \path (nantes.south) node (nantes_l) {\large (b) Nantes (748 buildings)};
+        \path (nantes_l.south) + (0, -0.25) node {\large Img./DSM res.: \SI{10}{\cm}};
+        \path (nantes.west) + (-4, 0) node (elancourt) {\includegraphics[height=12cm]{images/elancourt}};
+        \path (elancourt.south) node (elancourt_l) {\large (a) Elancourt (2009 buildings)};
+        \path (elancourt_l.south) + (0, -0.25) node {\large Img./DSM res.: \SI{6}{\cm}};
+        \path (nantes.east) + (4, 0) node (paris13) {\includegraphics[height=12cm]{images/paris-13}};
+        \path (paris13.south) node (paris13_l) {\large (c) Paris-13 (478 buildings)};
+        \path (paris13_l.south) + (0, -0.25) node {\large Img./DSM res.: \SI{10}{\cm}};
+    \end{tikzpicture}
+\end{document}
