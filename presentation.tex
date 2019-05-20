@@ -76,9 +76,9 @@
 \newacronym{acr::dsm}{DSM}{Digital Surface Model}
 \newacronym{acr::gui}{GUI}{Graphical User Interface}
 
-\title{Reconstructed 3D building model evaluation}
-\subtitle{the forgotten step}
-\date{\tiny \DTMdisplaydate{2019}{5}{15}{3}}
+\title{The necessary yet complex evaluation of 3D city models}
+\subtitle{a semantic approach}
+\date{\tiny \DTMdisplaydate{2019}{5}{23}{4}}
 \author{
     \scriptsize \underline{\textbf{Oussama Ennafii}} \inst{1, 2}, Arnaud Le Bris \inst{1}, Cl\'ement Mallet \inst{1}, Florent Lafarge \inst{2}
 }
@@ -97,121 +97,23 @@
 
     \section{Introduction}        
         \begin{frame}{Motivation}
-            \only<1-4|handout:1>{
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                    \item<1-> Automatic urban modeling: an \underline{active} research area [Musialski et al., 2012];
-                    \item<2-> Results \textcolor{IGNGreen}{seamless} but \textcolor{IGNRed}{lack generality} and \textcolor{IGNRed}{often erroneous} [Rottensteiner et al., 2014];
-                    \begin{itemize}[label=$\longrightarrow$]
-                        \item<3-> labourious manual corrections: $\approx$ \SI{2}{\hour\per\km\squared} per expert.
-                    \end{itemize}
-                    \item<4-> Urban 3D model semantic diagnostic \textcolor{IGNRed}{not well studied} [Boudet et al., 2006] [Michelin et al., 2013].
-                \end{itemize}
+            \only<1|handout:1>{
+                \begin{figure}
+                    \begin{center}
+                        \includestandalone[mode=buildnew, width=\textwidth]{context}
+                    \end{center}
+                \end{figure}
             }
-            \only<5-|handout:2>{
+            \only<2-|handout:2>{
                 \begin{block}{\textcolor{purple}{\textbf{Goal}}}
                     \underline{Detect} and \underline{describe} semantic errors that affect building 3D models.
                 \end{block}
                 ~\\
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                    \item<6-> Semantic errors \textbf{independent} from \underline{reconstruction methods} and \underline{urban scenes}.
-                    \item<7-> \underline{Transferability}, and \underline{scalability}, of the evaluation method.
+                    \item<2-> Semantic errors \textbf{independent} from \underline{reconstruction methods} and \underline{urban scenes}.
+                    \item<3-> \underline{Transferability}, and \underline{scalability}, of the evaluation method.
                 \end{itemize}
             }
-        \end{frame}
-        \begin{frame}{3D representation of buildings}
-            \begin{figure}
-                \begin{center}
-                    \includestandalone[mode=buildnew, width=.9\textwidth]{building_models-manhattan}
-                \end{center}
-            \end{figure}
-        \end{frame}
-        \begin{frame}{3D representation of buildings}
-            \begin{figure}
-                \begin{center}
-                    \includestandalone[mode=buildnew, width=.9\textwidth]{building_models-piecewise}
-                \end{center}
-            \end{figure}
-        \end{frame}
-        \begin{frame}{3D representation of buildings}
-            \begin{figure}
-                \begin{center}
-                    \includestandalone[mode=buildnew, width=.9\textwidth]{building_models-grammar}
-                \end{center}
-            \end{figure}
-        \end{frame}
-        \begin{frame}{3D representation of buildings}
-            \begin{figure}
-                \begin{center}
-                    \includestandalone[mode=buildnew, width=.9\textwidth]{building_models-all}
-                \end{center}
-            \end{figure}
-        \end{frame}
-        \begin{frame}{Potential use}
-            \begin{minipage}[0.2\textheight]{\textwidth}
-                \begin{columns}[T]
-                    \begin{column}{0.48\textwidth}
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                            \item<1-> Change detection [Taneja et al., 2015];
-                            \item<2-> Building model correction [Kowdle et al., 2011];
-                            \item<3-> Urban reconstruction method evaluation [Li et al., 2016];
-                            \item<4-> Crowd reconstruction quality assessment [Kovashka et al., 2016].
-                        \end{itemize}
-                    \end{column}
-                    \begin{column}{0.48\textwidth}
-                        \only<1|handout:0>{
-                            \begin{figure}
-                                \begin{center}
-                                    \includegraphics[width=\textwidth]{images/use/change_detection_taneja}
-                                \end{center}
-                            \end{figure}
-                        }
-                        \only<2|handout:0>{
-                            \vspace{1cm}
-                            \begin{figure}
-                                \begin{center}
-                                    \includegraphics[width=\textwidth]{images/use/active_learning_kowdle}
-                                \end{center}
-                            \end{figure}
-                        }
-                        \only<3|handout:0>{
-                            \vspace{3cm}
-                            \begin{figure}
-                                \begin{center}
-                                    \includegraphics[width=\textwidth]{images/use/comparison_li}
-                                \end{center}
-                            \end{figure}
-                        }
-                        \only<4|handout:0>{
-                            \vspace{1cm}
-                            \begin{figure}
-                                \begin{center}
-                                    \includegraphics[width=\textwidth]{images/use/crowdsourcing}
-                                \end{center}
-                            \end{figure}
-                        }
-                    \end{column}
-                \end{columns}
-            \end{minipage}
-        \end{frame}
-        \begin{frame}{Naming convention: 3D model vs. 3D mesh}
-            \begin{figure}
-                \begin{center}
-                    \begin{subfigure}{\textwidth}
-                        \begin{center}
-                            \includegraphics[height=.28\textheight]{images/difference_mesh_model/bercy_building_mesh_1_e5}
-                            \caption{\underline{3D mesh} of a building surface ($\approx$ \num[output-exponent-marker = \text{e}]{1e5} triangles).}
-                        \end{center}
-                    \end{subfigure}
-                    \\
-                    \begin{subfigure}{\textwidth}
-                        \begin{center}
-                            \includestandalone[mode=buildnew, height=.28\textheight]{ground_truth_model}
-                            \caption{Building \underline{3D polyhedral model} ($\approx$ 800 facets).}
-                        \end{center}
-                    \end{subfigure}
-                    \caption{Different model schemes of a building ($\approx$ \SI{139 x 71 x 23}{\metre}).}
-                \end{center}
-            \end{figure}
         \end{frame}
 
     \section{Methodology}
@@ -235,28 +137,21 @@
                     \end{figure}
                 }
             \end{frame}
-            \subsection{Error taxonomy}
+        \subsection{Error taxonomy}
             \begin{frame}{Taxonomy structure}
                 Two criteria determine the taxonomy structure:
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
                     \item<2-> the \textbf{\acrfull{acr::lod}};
                     \item<3-> the \textbf{finesse}: the semantic evaluation level.
                 \end{itemize}
-                ~\\
-                \uncover<4->{
-                    \begin{block}{Definition}
-                        \underline{maximal} \texttt{finesse} error $\Leftrightarrow$ corresponds \textit{semantically}, to a \textit{unitary} action required to correct the model $\Leftrightarrow$ \texttt{atomic} error.
-                    \end{block}
+                \uncover<2->{
+                    \begin{figure}
+                        \begin{center}
+                            \includestandalone[mode=buildmissing, width=\textwidth]{lods}
+                        \end{center}
+                    \end{figure}
                 }
             \end{frame}
-            \begin{frame}{\acrshort{acr::lod}: a brief reminder}
-                \begin{figure}
-                    \begin{center}
-                        \includestandalone[mode=buildmissing, width=\textwidth]{lods}
-                    \end{center}
-                    \caption{Basic \acrshort{acr::lod} classification used in Computer Vision.}
-                \end{figure}
-            \end{frame}    
             \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
                 \begin{figure}
                     \includestandalone[mode=buildmissing, width=\textwidth]{finesse_0_taxonomy}
@@ -365,7 +260,7 @@
         \subsection{Quality prediction pipeline}
             \begin{frame}{The evaluation pipeline}
                 \begin{figure}
-                    \includestandalone[mode=buildnew, height=.75\textheight]{graphical_pipeline}
+                    \includestandalone[mode=buildnew, height=.81\textheight]{graphical_pipeline}
                 \end{figure}
             \end{frame}
             \begin{frame}{Geometric features}
@@ -405,26 +300,6 @@
                     \includestandalone[mode=buildnew, width=.9\textwidth]{dataset}
                 \end{center}
             \end{figure}
-        \end{frame}
-        \begin{frame}{Datasets: errors occurences}
-            \only<0|handout:1>{
-                \begin{figure}
-                    \begin{center}
-                        \includestandalone[mode=buildmissing, width=.7\textwidth]{dataset_stats_building}
-                    \end{center}
-                \end{figure}
-            }
-            \only<1-|handout:2>{
-                \begin{figure}
-                    \begin{center}
-                        \includestandalone[mode=buildmissing, width=.8\textwidth]{dataset_stats_facet}
-                    \end{center}
-                \end{figure}
-            }
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                \item<2-|handout:3> \footnotesize Errors are \underline{heterogeneously} represented in the datasets.
-                \item<3-|handout:4> \footnotesize The less frequent errors would raise serious learning problems.
-            \end{itemize}
         \end{frame}
         \begin{frame}{Ablation study: Elancourt example}
             \begin{table}
@@ -477,29 +352,6 @@
                 \item[\textcolor{IGNRed}{$\blacktriangleright$}]<5-> \footnotesize Highly unbalanced labels are \underline{hard} to detect.
             \end{itemize}
         \end{frame}
-        \begin{frame}{Feature importance}
-            \only<1|handout:0>{
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1> Does this mean additional modalities are useless?
-                \end{itemize}
-            }
-            \only<2|handout:1>{
-                \begin{figure}
-                    \includestandalone[mode=buildnew, width=.846\textwidth]{feat_imp_building}
-                \end{figure}
-            }
-            \only<3|handout:2>{
-                \begin{figure}
-                    \includestandalone[mode=buildnew, width=\textwidth]{feat_imp_facet}
-                \end{figure}
-            }
-            \only<4-|handout:3>{
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                    \item<4-> All features importances contribute \underline{equally} around 33\%.
-                    \item<5-> When do these additional features play a role?
-                \end{itemize}
-            }
-        \end{frame}
         \begin{frame}{Transferability}
             \begin{table}
                 \scriptsize
@@ -532,25 +384,6 @@
                 \end{itemize}
             }
         \end{frame}
-        \begin{frame}{Some failure cases on Elancourt}
-            \begin{figure}
-                \begin{center}
-                \tiny
-                    \begin{tabular}{| x{.06\textwidth} | x{.035\textwidth} | x{.035\textwidth} || x{.06\textwidth} | x{.035\textwidth} | x{.035\textwidth} || x{.06\textwidth} | x{.035\textwidth} | x{.035\textwidth} || x{.06\textwidth} | x{.035\textwidth} | x{.035\textwidth} |}
-                        \hline
-                        \multicolumn{3}{| c ||}{\includegraphics[width=.2\textwidth,valign=m,margin=1pt 1pt]{images/prediction_results/valid_as_bul_over}} & \multicolumn{3}{ c ||}{\includegraphics[width=.2\textwidth,valign=m,margin=0cm 1pt]{images/prediction_results/no_imprec_no_fac_over}} & \multicolumn{3}{ c ||}{\includegraphics[width=.2\textwidth,valign=m,margin=0cm 1pt]{images/prediction_results/no_under_seg}} & \multicolumn{3}{ c |}{\includegraphics[width=.2\textwidth,valign=m,margin=0cm 1pt]{images/prediction_results/no_bul_under_seg}} \\
-                        \hline
-                        \textbf{Errors} & \textbf{G.T.} & \textbf{Pred.} & \textbf{Errors} & \textbf{G.T.} & \textbf{Pred.} & \textbf{Errors} & \textbf{G.T.} & \textbf{Pred.} & \textbf{Errors} & \textbf{G.T.} & \textbf{Pred.}\\
-                        \hline
-                        \texttt{BOS} & \xmark & \cmark & \texttt{BUS} & \xmark & \cmark & \texttt{BOS} & \cmark & \cmark & \texttt{BOS} & \cmark & \xmark \\
-                         &  &  & \texttt{FIG} & \cmark & \xmark & \texttt{FUS} & \cmark & \xmark &  \texttt{FOS} & \cmark & \xmark \\
-                            &  &  & \texttt{FOS} & \cmark & \xmark &  &  &  & \texttt{BUS} & \cmark & \xmark \\
-                            &  &  &  &  &  &  &  &  &  \texttt{BIB} & \cmark & \cmark \\
-                        \hline
-                    \end{tabular}
-                \end{center}
-            \end{figure}
-        \end{frame}
         
     \section{Conclusion}
         \begin{frame}{\textcolor{yellow}{Conclusion} \& \textcolor{purple}{Perspectives}}
@@ -559,8 +392,8 @@
                 \item<2-> \textbf{Fast, lightweight and modular} pipeline for model evaluation;
                 \item<3-> Pipeline tested with \textbf{baseline} handcrafted features:
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<4-> Results limited by the lack of training data;
-                        \item<5-> Need for a thorough representation of urban landscapes.
+                        \item<4-> Geometric features are often sufficient for error prediction;
+                        \item<5-> Adding modalities is most helpfull in transferability.
                     \end{itemize}
             \end{itemize}
             \uncover<6->{

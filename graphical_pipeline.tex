@@ -30,7 +30,10 @@
         \path (ortho_projection |- residual_legend) node (ortho_projection_legend) {\footnotesize (d) Image based};
 
         \draw[rounded corners] (facet_graph.north west) rectangle (ortho_projection_legend.east |- facet_graph_legend.south west);
-        \path (facet_graph.north west) node[anchor=south west] (features) {\footnotesize Features}; 
+        \path (facet_graph.north west) node[anchor=south west] (features) {\footnotesize Features};
+
+        \path (ortho_projection.east |- model.north) + (1, 0) node (rs_data) {};
+        \draw[->, line width=1pt, dashed] (rs_data) |- (ortho_projection_legend.east |- ortho_projection) node [left, pos=.1, text width=3em] {\scriptsize Remote sensing data.};
 
 		\path (residual.south) + (0, -2) node (errors) {\includestandalone[mode=buildnew, height=1cm]{building_errors}};
         \path (errors.south) + (0,-.2) node (errors_legend) {\footnotesize (e) Error detection};
