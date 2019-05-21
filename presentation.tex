@@ -97,202 +97,153 @@
 
     \section{Introduction}        
         \begin{frame}{Motivation}
-            \only<1|handout:1>{
-                \begin{figure}
-                    \begin{center}
-                        \includestandalone[mode=buildnew, width=\textwidth]{context}
-                    \end{center}
-                \end{figure}
-            }
-            \only<2-|handout:2>{
-                \begin{block}{\textcolor{purple}{\textbf{Goal}}}
-                    \underline{Detect} and \underline{describe} semantic errors that affect building 3D models.
-                \end{block}
-                ~\\
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                    \item<2-> Semantic errors \textbf{independent} from \underline{reconstruction methods} and \underline{urban scenes}.
-                    \item<3-> \underline{Transferability}, and \underline{scalability}, of the evaluation method.
-                \end{itemize}
-            }
+            \begin{figure}
+                \begin{center}
+                    \includestandalone[mode=buildnew, width=\textwidth]{context}
+                \end{center}
+            \end{figure}
+        \end{frame}
+        \begin{frame}{Problem statement}
+            \begin{block}{\textcolor{purple}{\textbf{Goal}}}
+                \underline{Detect} and \underline{describe} semantic errors that affect building 3D models.
+            \end{block}
+            ~\\
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \item<2-> Semantic errors \textbf{independent} from \underline{reconstruction methods} and \underline{urban scenes}.
+                \item<3-> \underline{Transferability}, and \underline{scalability}, of the evaluation method.
+            \end{itemize}
         \end{frame}
 
     \section{Methodology}
-            \begin{frame}{Main ideas behind our approach}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                    \item<1-> \underline{Compile} errors that affect building models in a \underline{taxonomy};
-                    \item<2-> Evaluation at \underline{building level} $\longrightarrow$ formulated as a \underline{supervised} classification problem;
-                    \item<3-> Study in a \underline{2.5D overhead (aerial)} modeling setting.
-                \end{itemize}
-                \uncover<3->{
-                    \begin{figure}
-                        \centering
-                        \begin{subfigure}{.48\textwidth}
-                            \centering
-                            \includegraphics[height=.4\textheight]{images/image_kind/aerial}
-                        \end{subfigure}
-                        \begin{subfigure}{.48\textwidth}
-                            \centering
-                            \includegraphics[height=.4\textheight]{images/image_kind/no-stereopolis}
-                        \end{subfigure}
-                    \end{figure}
-                }
-            \end{frame}
-        \subsection{Error taxonomy}
-            \begin{frame}{Taxonomy structure}
-                Two criteria determine the taxonomy structure:
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                    \item<2-> the \textbf{\acrfull{acr::lod}};
-                    \item<3-> the \textbf{finesse}: the semantic evaluation level.
-                \end{itemize}
-                \uncover<2->{
+        \begin{frame}{Main ideas behind our approach}
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \item<1-> \underline{Compile} errors that affect building models in a \underline{taxonomy};
+                \item<2-> Evaluation at \underline{building level} $\longrightarrow$ formulated as a \underline{supervised} classification problem;
+                \item<3-> Study in a \underline{2.5D overhead (aerial)} modeling setting.
+            \end{itemize}
+        \end{frame}
+        \begin{frame}{Taxonomy structure}
+            Two criteria determine the taxonomy structure:
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \item<2-> the \textbf{\acrfull{acr::lod}};
                     \begin{figure}
                         \begin{center}
                             \includestandalone[mode=buildmissing, width=\textwidth]{lods}
                         \end{center}
                     \end{figure}
-                }
-            \end{frame}
-            \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
+                \item<3-> the \textbf{finesse}: the semantic evaluation level.
+            \end{itemize}
+        \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
+            \begin{figure}
+                \includestandalone[mode=buildmissing, width=\textwidth]{finesse_0_taxonomy}
+            \end{figure}
+        \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 1$)}
+            \begin{figure}
+                \includestandalone[mode=buildmissing, width=\textwidth]{finesse_1_taxonomy}
+            \end{figure}
+        \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 2$)}
+            \only<1|handout:0>{
                 \begin{figure}
-                    \includestandalone[mode=buildmissing, width=\textwidth]{finesse_0_taxonomy}
+                    \includestandalone[mode=buildmissing, width=\textwidth]{finesse_2_taxonomy}
                 \end{figure}
-            \end{frame}
-            \begin{frame}{Error taxonomy (\texttt{finesse} $= 1$)}
+            }
+            \only<2>{
                 \begin{figure}
-                    \includestandalone[mode=buildmissing, width=\textwidth]{finesse_1_taxonomy}
+                    \includestandalone[mode=buildmissing, width=\textwidth]{finesse_2_taxonomy_lods}
                 \end{figure}
-            \end{frame}
-            \begin{frame}{Error taxonomy (\texttt{finesse} $= 2$)}
-                \only<1|handout:0>{
-                    \begin{figure}
-                        \includestandalone[mode=buildmissing, width=\textwidth]{finesse_2_taxonomy}
-                    \end{figure}
-                }
-                \only<2>{
-                    \begin{figure}
-                        \includestandalone[mode=buildmissing, width=\textwidth]{finesse_2_taxonomy_lods}
-                    \end{figure}
-                }
-            \end{frame}
-            \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-1)}
-                \begin{figure}
-                    \includestandalone[mode=buildmissing, width=\textwidth]{finesse_3_bul_taxonomy}
-                \end{figure}
-            \end{frame}
-            \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
-                \only<1|handout:1>{
-                    \begin{figure}
-                        \begin{center}
-                            \begin{subfigure}{.4\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.45\textheight]{images/errors/building/under_segmentation}}
-                                \caption{\label{fig::bul_under} Under segmentation (\texttt{BUS}).}
-                            \end{subfigure}
-                            \begin{subfigure}{.5\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.45\textheight]{images/errors/building/over_segmentation}}
-                                \caption{\label{fig::bul_over} Over segmentation (\texttt{BOS}).}
-                            \end{subfigure}
-                        \end{center}
-                    \end{figure}
-                }
-                \only<2|handout:2>{
-                    \begin{figure}
-                        \begin{center}
-                            \begin{subfigure}{.45\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.5\textheight]{images/errors/building/border}}
-                                \caption{\label{fig::bul_footprint} Imprecise border (\texttt{BIB}).}
-                            \end{subfigure}
-                            \begin{subfigure}{.45\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.5\textheight]{images/errors/building/topology}}
-                                \caption{\label{fig::bul_height} Inaccurate topology (\texttt{BIT}).}
-                            \end{subfigure}
-                        \end{center}
-                    \end{figure}
-                }
-            \end{frame}
-            \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-2)}
-                \begin{figure}
-                    \includestandalone[mode=buildmissing, width=\textwidth]{finesse_3_all_taxonomy}
-                \end{figure}
-            \end{frame}
-            \begin{frame}{Facet \texttt{atomic} errors: 2.5D overhead reconstruction case}
-                \only<1|handout:1>{
-                    \begin{figure}
-                        \begin{center}
-                            \begin{subfigure}{.31\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/under_segmentation}}
-                                \caption{\label{fig::fac_under} Under segmentation (\texttt{FUS})}
-                            \end{subfigure}
-                            \begin{subfigure}{.31\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/over_segmentation}}
-                                \caption{\label{fig::fac_over} Over segmentation (\texttt{FOS})}
-                            \end{subfigure}
-                            \begin{subfigure}{.31\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/geometry}}
-                                \caption{\label{fig::fac_height} Imprecise geometry (\texttt{FIG})}
-                            \end{subfigure}
-                        \end{center}
-                    \end{figure}
-                }
-                \only<2|handout:2>{
-                    \begin{figure}
-                        \begin{center}
-                            \begin{subfigure}{.45\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.65\textwidth]{images/errors/facet/border}}
-                                \caption{\label{fig::fac_footprint} Imprecise borders (\texttt{FIB})}
-                            \end{subfigure}
-                            \begin{subfigure}{.45\textwidth}
-                                \centering
-                                \fbox{\includegraphics[height=.65\textwidth]{images/errors/facet/topology}}
-                                \caption{\label{fig::fac_height} Inaccurate topology (\texttt{FIT})}
-                            \end{subfigure}
-                        \end{center}
-                    \end{figure}
-                }
-            \end{frame}
-        \subsection{Quality prediction pipeline}
-            \begin{frame}{The evaluation pipeline}
-                \begin{figure}
-                    \includestandalone[mode=buildnew, height=.81\textheight]{graphical_pipeline}
-                \end{figure}
-            \end{frame}
-            \begin{frame}{Geometric features}
-                \begin{figure}
-                    \includestandalone[mode=buildnew, height=.62\textheight]{geometric_features}
-                \end{figure}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<2-> \footnotesize Statistics are computed, for each \underline{attribute}, at \underline{building} level.
-                    \item<3-> \footnotesize Results are concatenated in a \underline{fixed size} feature vector (\textit{length = 20} in experiments).
-                \end{itemize}
-            \end{frame}
-            \begin{frame}{Height-based features}
-                \begin{figure}
-                    \includestandalone[mode=buildnew, width=\textwidth]{altimetric_features}
-                \end{figure}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<2-> \footnotesize Feature vectors consist on the concatenated histogram values.
-                    \item<3-> \footnotesize The histogram resolution is \underline{constant} (\textit{length = 20} in experiments).
-                \end{itemize}
-            \end{frame}
-            \begin{frame}{Image-based features}
+            }
+        \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-1)}
+            \begin{figure}
+                \includestandalone[mode=buildmissing, width=\textwidth]{finesse_3_bul_taxonomy}
+            \end{figure}
+        \end{frame}
+        \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
+            \only<1|handout:1>{
                 \begin{figure}
                     \begin{center}
-                        \includestandalone[mode=buildnew, width=.9\textwidth]{radiometric_features}
+                        \begin{subfigure}{.4\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.45\textheight]{images/errors/building/under_segmentation}}
+                            \caption{\label{fig::bul_under} Under segmentation (\texttt{BUS}).}
+                        \end{subfigure}
+                        \begin{subfigure}{.5\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.45\textheight]{images/errors/building/over_segmentation}}
+                            \caption{\label{fig::bul_over} Over segmentation (\texttt{BOS}).}
+                        \end{subfigure}
                     \end{center}
                 \end{figure}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<2-> \footnotesize A \underline{histogram} of the cosine similarity is computed \underline{per edge}.
-                    \item<3-> \footnotesize A \underline{weighted sum} of all edge histograms is computed \underline{over the building}.
-                    \item<4-> \footnotesize All histograms having the same resolution result in a feature vector (\textit{length = 20} in experiments).
-                \end{itemize}
-            \end{frame}
+            }
+            \only<2|handout:2>{
+                \begin{figure}
+                    \begin{center}
+                        \begin{subfigure}{.45\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.5\textheight]{images/errors/building/border}}
+                            \caption{\label{fig::bul_footprint} Imprecise border (\texttt{BIB}).}
+                        \end{subfigure}
+                        \begin{subfigure}{.45\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.5\textheight]{images/errors/building/topology}}
+                            \caption{\label{fig::bul_height} Inaccurate topology (\texttt{BIT}).}
+                        \end{subfigure}
+                    \end{center}
+                \end{figure}
+            }
+        \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-2)}
+            \begin{figure}
+                \includestandalone[mode=buildmissing, width=\textwidth]{finesse_3_all_taxonomy}
+            \end{figure}
+        \end{frame}
+        \begin{frame}{Facet \texttt{atomic} errors: 2.5D overhead reconstruction case}
+            \only<1|handout:1>{
+                \begin{figure}
+                    \begin{center}
+                        \begin{subfigure}{.31\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/under_segmentation}}
+                            \caption{\label{fig::fac_under} Under segmentation (\texttt{FUS})}
+                        \end{subfigure}
+                        \begin{subfigure}{.31\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/over_segmentation}}
+                            \caption{\label{fig::fac_over} Over segmentation (\texttt{FOS})}
+                        \end{subfigure}
+                        \begin{subfigure}{.31\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/geometry}}
+                            \caption{\label{fig::fac_height} Imprecise geometry (\texttt{FIG})}
+                        \end{subfigure}
+                    \end{center}
+                \end{figure}
+            }
+            \only<2|handout:2>{
+                \begin{figure}
+                    \begin{center}
+                        \begin{subfigure}{.45\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.65\textwidth]{images/errors/facet/border}}
+                            \caption{\label{fig::fac_footprint} Imprecise borders (\texttt{FIB})}
+                        \end{subfigure}
+                        \begin{subfigure}{.45\textwidth}
+                            \centering
+                            \fbox{\includegraphics[height=.65\textwidth]{images/errors/facet/topology}}
+                            \caption{\label{fig::fac_height} Inaccurate topology (\texttt{FIT})}
+                        \end{subfigure}
+                    \end{center}
+                \end{figure}
+            }
+        \end{frame}
+        \begin{frame}{The evaluation pipeline}
+            \begin{figure}
+                \includestandalone[mode=buildnew, height=.81\textheight]{graphical_pipeline}
+            \end{figure}
+        \end{frame}
     \section{Experiments}
         \begin{frame}{Datasets: urban scenes}
             \begin{figure}
