@@ -12,27 +12,26 @@
 \usepackage{pgfplots}
 
 \usepackage{tikz}
-\usetikzlibrary{shapes, arrows, shadows, calc, decorations}
+\usetikzlibrary{shapes, arrows, shadows, calc, decorations, 3d}
 
 \usepackage{amsmath}
 
-\tikzstyle{data}=[
-  draw,
-  font=\Large,
-  align=center,
-  minimum height=2.5em,
-  drop shadow,
-  rounded corners
-]
-
-
 \begin{document}
+    \tikzstyle{data}=[
+        draw,
+        font=\Large,
+        align=center,
+        minimum height=2.5em,
+        drop shadow,
+        rounded corners
+    ]
+  
 	\pgfdeclarelayer{background}
     \pgfdeclarelayer{foreground}
     \pgfsetlayers{background,main,foreground}
 
     \begin{tikzpicture}
-    	\node (residual) at (0,0) {\includegraphics[height=1cm, angle=270]{images/residual}};
+    	\node (residual) at (0,0) {\includegraphics[height=1cm, angle=270]{images/graphical_abstract/residual}};
         \path (residual.south) + (0,-.2) node (residual_legend) {\tiny (c) Height based};
         
         \path (residual.west) + (-.8,0) node (facet_graph) {\includestandalone[mode=buildnew, height=1cm]{building_graph}};
@@ -41,7 +40,7 @@
         \path (facet_graph.west) + (-1,0) node (model) {\includestandalone[mode=buildnew, height=1cm]{building_model}};
         \path (model |- residual_legend) node (model_legend) {\tiny (a) Input model};
         
-        \path (residual.east) + (.8,0) node (ortho_projection) {\includegraphics[height=1cm, angle=270]{images/orthoprojection}};
+        \path (residual.east) + (.8,0) node (ortho_projection) {\includegraphics[height=1cm, angle=270]{images/graphical_abstract/orthoprojection}};
         \path (ortho_projection |- residual_legend) node (orthoprojection_legend) {\tiny (d) Image based};
         
         \draw[decorate, decoration={brace, amplitude=3pt}] (facet_graph.north west) -- (ortho_projection.east |- facet_graph.north) node[midway, yshift=5pt]{\tiny Features};

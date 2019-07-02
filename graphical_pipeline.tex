@@ -17,7 +17,7 @@
 
 \begin{document}
     \begin{tikzpicture}
-    	\node (residual) at (0,0) {\fbox{\includegraphics[height=1cm, angle=270]{images/graph_abstract/residual}}};
+    	\node (residual) at (0,0) {\fbox{\includegraphics[height=1cm, angle=270]{images/graphical_abstract/residual}}};
         \path (residual.south) + (0,-.2) node (residual_legend) {\footnotesize (c) Height based};
 
         \path (residual.west) + (-2, 0) node (facet_graph) {\includestandalone[mode=buildnew, height=1cm]{building_graph}};
@@ -26,7 +26,7 @@
         \path (residual.north) + (0, 2) node (model) {\includestandalone[mode=buildnew, height=1cm]{building_model}};
         \path (model.south) + (0,-.2) node (model_legend) {\footnotesize (a) Input model};
 
-        \path (residual.east) + (2, 0) node (ortho_projection) {\fbox{\includegraphics[height=1cm, angle=270]{images/graph_abstract/orthoprojection}}};
+        \path (residual.east) + (2, 0) node (ortho_projection) {\fbox{\includegraphics[height=1cm, angle=270]{images/graphical_abstract/orthoprojection}}};
         \path (ortho_projection |- residual_legend) node (ortho_projection_legend) {\footnotesize (d) Image based};
 
         \draw[rounded corners] (facet_graph.north west) rectangle (ortho_projection_legend.east |- facet_graph_legend.south west);
