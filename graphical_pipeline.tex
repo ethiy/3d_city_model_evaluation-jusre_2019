@@ -41,6 +41,6 @@
         \path (errors_list.south) node[align=left] (errors_list) {\scriptsize {\color{blue}$\blacksquare$ \texttt{FOS}}};
 
         \path[draw, ->, line width=1pt, rounded corners=10pt, IGNGreen] (model_legend.south) -- (residual |- facet_graph.north);
-        \path[draw, ->, line width=1pt, rounded corners=10pt, IGNGreen] (residual |- facet_graph_legend.south) -- (errors.north) node [midway, left, IGNGreen] {\scriptsize Supervized classifier (\underline{RF}, SVM \dots)};
+        \path[draw, ->, line width=1pt, rounded corners=10pt, IGNGreen] (residual |- facet_graph_legend.south) -- (errors.north) node [midway, left, IGNGreen] {\scriptsize Supervised classifier (\underline{RF}, SVM \dots)};
     \end{tikzpicture}
 \end{document}
